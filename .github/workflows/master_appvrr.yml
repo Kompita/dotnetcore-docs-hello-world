@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy ASP.Net Core app to Azure Web App - appvrr
 
 on:
@@ -35,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'production'
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
@@ -49,14 +52,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.__clientidsecretname__ }}
-          tenant-id: ${{ secrets.__tenantidsecretname__ }}
-          subscription-id: ${{ secrets.__subscriptionidsecretname__ }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4806727BD8AB4B41B2ABB3B5994EF2BB }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_699851BFE2E047739DB106CE895C7C22 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F29A7605BC3D41D0BF4CB4BD8F468156 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'appvrr'
-          slot-name: 'production'
+          slot-name: 'Production'
           package: .
+          
